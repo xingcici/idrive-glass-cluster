@@ -1,6 +1,9 @@
 import { parseTheme } from '@idv7lol/theme-schema';
 import { ThemeEngine } from '@idv7lol/theme-engine';
-import source from './theme.json';
+import standardSource from './theme.json';
+import sportSource from '../glass-cluster-sport/theme.json';
+const isSport = new URLSearchParams(location.search).get('layout') === 'sport';
+const source = isSport ? sportSource : standardSource;
 
 const parsed = parseTheme(source);
 if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues));
@@ -12,12 +15,17 @@ const controls = Object.fromEntries(
     document.getElementById(id),
   ]),
 );
+if (isSport) {
+  controls.palette.value = 'sport';
+  controls.speed.value = '120';
+  controls.rpm.value = '5400';
+}
 const samples = {
   'vehicle.range': 426,
   'vehicle.trip.distance': 65,
   'engine.oil.temp': 96,
   'environment.outside.temp': 22,
-  'transmission.gear': 'D',
+  'transmission.gear': isSport ? '3' : 'D',
   'drive.mode': 'COMFORT',
   'fuel.level': 68,
 };
@@ -47,7 +55,7 @@ function draw() {
     const ctx = canvas.getContext('2d');
     ctx.save();
     ctx.fillStyle = '#f4f6fa';
-    ctx.font = '112px sans-serif';
+    ctx.font = isSport ? '144px sans-serif' : '112px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(controls.missing.checked ? '-' : samples['transmission.gear'], 1536, 375);
