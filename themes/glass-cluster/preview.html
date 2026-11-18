@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" />
+  <link rel="icon" href="data:," />
+  <title>Glass Cluster · 设计预览</title>
+  <body style="margin: 0; background: black; color: white; font-family: system-ui">
+    <canvas
+      width="1920"
+      height="720"
+      style="width: 100%; display: block"
+      aria-label="Glass Cluster 仪表模拟预览"
+    ></canvas>
+    <p>Glass Cluster · 模拟数据 · 非实车画面</p>
+    <label
+      >配色
+      <select id="palette">
+        <option value="graphite">Graphite</option>
+        <option value="sport">Sport</option>
+        <option value="eco">Eco</option>
+      </select></label
+    >
+    <label>车速 <input id="speed" type="range" min="0" max="260" value="88" /></label>
+    <label>转速 <input id="rpm" type="range" min="0" max="7000" value="2400" /></label>
+    <label><input id="zones" type="checkbox" />显示原厂保留区域</label>
+    <label><input id="missing" type="checkbox" />模拟信号缺失</label>
+    <script type="module" src="./preview.js"></script>
+  </body>
+</html>
