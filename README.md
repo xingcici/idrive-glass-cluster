@@ -1,3 +1,13 @@
+# iDrive Glass Cluster
+
+基于 [ALMSTRA/idv7lol](https://github.com/ALMSTRA/idv7lol) 的 BMW iDrive 7 仪表主题项目，探索受 Apple CarPlay 新一代视觉语言启发的设计。
+
+当前状态：已建立开发仓库，尚未实现自定义主题或部署到车辆。这不是官方 CarPlay Ultra，也不提供 CarPlay 协议或导航能力升级。
+
+项目范围与设计方向见 [项目说明](docs/GLASS_CLUSTER.md)。保留上游源码、版权声明和 GPL-3.0-or-later 许可；以下为上游项目说明，其发布链接和验证结论属于上游。
+
+---
+
 <p align="center"><img src="docs/assets/logo.png" alt="idv7lol" width="480"></p>
 
 # idv7lol
