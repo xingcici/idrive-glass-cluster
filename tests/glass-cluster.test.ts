@@ -12,6 +12,19 @@ if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues));
 const theme = parsed.theme;
 
 describe('Glass Cluster', () => {
+  it('keeps the split tachometer continuous across sector boundaries', () => {
+    const sectors = theme.components.filter((c) => c.id.startsWith('revs-'));
+    expect(sectors).toHaveLength(9);
+    const state = new EngineState();
+    for (const rpm of [0, 7000 / 9, 2400, 6000, 7000, 8000]) {
+      state.bus.set('engine.rpm', rpm, 0);
+      const filled = sectors.reduce(
+        (sum, c) => sum + state.evaluate(c.id, c.binding!).normalized / sectors.length,
+        0,
+      );
+      expect(filled).toBeCloseTo(Math.min(rpm / 7000, 1));
+    }
+  });
   it('fits renderer limits and reserved regions without unsupported glyphs', () => {
     const report = validateTheme(source);
     expect(report.errors).toEqual([]);

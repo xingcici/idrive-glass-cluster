@@ -1,6 +1,8 @@
-# Glass Cluster 0.1.0
+# Glass Cluster 0.2.0
 
-面向 iDrive 7 的 CarPlay 风格原创主题。中央大号车速、细转速环，灰黑渐变信息卡片；三套配色随驾驶模式切换，也可手动选择。
+参考苹果官方展示的阿斯顿·马丁 CarPlay Ultra：左右双圆环、左侧数字车速、右侧档位区域、中央行程列表、底部辅助弧线及深蓝背景。保留 Graphite、Sport、Eco 三套配色。
+
+参考：[苹果官方展示](https://www.apple.com/newsroom/2025/05/carplay-ultra-the-next-generation-of-carplay-begins-rolling-out-today/)中的蓝色细圆环主题，以及灰色粗圆环主题的中央行程布局。参考照片未复制进项目。
 
 ![Graphite，模拟数据](preview-graphite.png)
 
@@ -30,9 +32,10 @@ npx tsx packages/theme-compiler/src/cli.ts build themes/glass-cluster/theme.json
 
 ## 实现边界
 
-- 使用原生主题格式，无新增运行依赖；玻璃质感通过渐变、圆角和描边实现，没有实时背景模糊。
-- 使用上游显示配置的保留区；右侧中央留给原厂档位显示，实车位置仍需核实。
-- 本版中央被车速占用，不提供地图窗口或高德导航转发。
+- 使用原生主题格式，无新增运行依赖；没有实时背景模糊。
+- 使用上游显示配置的保留区；右侧圆环分成连续的小弧段，绘制边界避开原厂档位框，转速范围为 0–7000 rpm。
+- 右侧 D 仅为浏览器模拟的原厂档位，可取消勾选隐藏；主题文件不绘制此区域。实车原厂档位的外观和位置仍需核实。
+- 中央显示行程距离、续航和油量，没有接入 CarPlay 媒体、地图或高德导航转发。
 - 文字暂用车端字库支持的英文。浏览器字体与车端字体可能存在差异。
 - 已通过编译及自动检查，未上车验证。未修改现有车机主题、启动逻辑或配色持久化。
 - GPL-3.0-or-later，基于 ALMSTRA/idv7lol；非 Apple 或 BMW 官方产品。
